@@ -10,54 +10,73 @@ body {
   color: #333;
 }
 
+/* Vùng hiển thị video full màn hình */
 header {
   position: relative;
+  width: 100%;
   height: 70vh;
   overflow: hidden;
+  background: #000; /* fallback nếu video chưa tải */
 }
 
-.header-video {
+.header-video-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  overflow: hidden;
+  background: #000;
 }
 
+/* Video YouTube tự động phóng to tránh viền đen */
+.header-video-wrapper iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78%; /* tỷ lệ 16:9 để đảm bảo không bị đen */
+  height: 100%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  pointer-events: none;
+  border: none;
+}
+
+/* Chữ đè giữa video */
 .header-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.4);
-  color: white;
+  color: #fff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
+/* Tiêu đề và mô tả */
 .header-overlay h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-
-.header-video-wrapper {
-  position: relative;
-  width: 100%;
-  height: 70vh;
-  overflow: hidden;
+.header-overlay p {
+  font-size: 1.2rem;
+  max-width: 600px;
 }
 
-.header-video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
+/* 🔽 RESPONSIVE: Ẩn chữ trên màn hình nhỏ */
+@media (max-width: 768px) {
+  header {
+    height: 20vh;
+  }
+  .header-overlay {
+    display: none;
+  }
 }
 
 
